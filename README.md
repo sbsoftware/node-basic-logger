@@ -12,7 +12,7 @@ Installation
 Usage
 -----
 
-	var logger = require('logger');
+	var logger = require('basic-logger');
 
 	var customConfig = {
 		showMillis: true;
