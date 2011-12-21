@@ -7,7 +7,7 @@ Everything you log is printed to the console.
 Installation
 ------------
 
-	npm install logger
+	npm install basic-logger
 
 Usage
 -----
