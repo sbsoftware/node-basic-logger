@@ -32,6 +32,11 @@ Config options
 * `showMillis` - Show the milliseconds in the timestamp
 * `stringifyJSON` - Apply JSON.stringify to the given message. Good to log objects or arrays.
 
+Test
+----
+
+You'll net `vows`. Then just run `npm test`.
+
 Future versions
 ---------------
 
