@@ -35,7 +35,7 @@ Config options
 Test
 ----
 
-You'll net `vows`. Then just run `npm test`.
+You'll need `vows`. Then just run `npm test`.
 
 Future versions
 ---------------
