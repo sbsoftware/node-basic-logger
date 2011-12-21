@@ -31,3 +31,8 @@ Config options
 
 * `showMillis` - Show the milliseconds in the timestamp
 * `stringifyJSON` - Apply JSON.stringify to the given message. Good to log objects or arrays.
+
+Future versions
+---------------
+
+I am willing to add support for colored log messages and allow to define a prefix which is prepended to all messages.
