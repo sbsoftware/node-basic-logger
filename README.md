@@ -29,5 +29,5 @@ Usage
 Config options
 --------------
 
-`showMillis` - Show the milliseconds in the timestamp
-`stringifyJSON` - Apply JSON.stringify to the given message. Good to log objects or arrays.
+* `showMillis` - Show the milliseconds in the timestamp
+* `stringifyJSON` - Apply JSON.stringify to the given message. Good to log objects or arrays.
