@@ -1,0 +1,36 @@
+{
+	"name": "logger",
+	"version": "0.0.1",
+	"description": "basic logger for nodejs supporting error, warning, debug and info messages with timestamp.",
+	"author": "Stefan Bilharz <s.bilharz@web.de>",
+	"keywords": ["basic logger","log","logging","nodejs"],
+	"homepage": "https://github.com/drd0rk/logger",
+	"bugs": {
+		"url": "git://github.com/drd0rk/logger/issues/"
+	},
+	"dependencies": {
+		"pkginfo": "0.2.x",
+		"underscore": "1.2.x"
+	},
+	"devDependencies": {
+		"coffee-script": "1.2.x",
+		"vows": "0.5.x"
+	},
+	"main": "lib/logger",
+	"directories": {
+		"lib": "./lib"
+	},
+	"licenses": [
+		{
+		"type": "MIT",
+		"url": "http://opensource.org/licenses/mit-license.php"
+		}
+	],
+	"engines": {
+		"node": ">= 0.4"
+	},
+	"scripts": {
+		"test": "NODE_ENV=test node_modules/.bin/vows --spec test/*.coffee",
+		"watch": "node_modules/.bin/coffee -c -w -o lib src"
+	}
+}
