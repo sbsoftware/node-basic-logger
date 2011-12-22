@@ -5,7 +5,9 @@ module.exports = class Logger
 
 	@defaultConfig = 
 		showMillis: false
+		showTimestamp: true
 		stringifyJSON: true
+		prefix: ""
 
 	constructor: (config={}) ->
 		@config = _.extend Logger.defaultConfig,config
@@ -23,7 +25,11 @@ module.exports = class Logger
 		timestamp = date.getFullYear()+"-"+@padZeros((date.getMonth()+1),2)+"-"+@padZeros(date.getDate(),2)+" "+@padZeros(date.getHours(),2)+":"+@padZeros(date.getMinutes(),2)+":"+@padZeros(date.getSeconds(),2)
 		timestamp += "."+@padZeros(date.getMilliSeconds(),3) if @config.showMillis
 		msg = JSON.stringify msg if @config.stringifyJSON
-		console.log '['+timestamp+'] ('+level+') '+ msg
+		output += '['+timestamp+']' if @config.showTimestamp
+		output += ' '+@config.prefix if @config.prefix != ""
+		output += ' ('+level+') '
+		output += msg
+		console.log output
 		
 	error: (msg) ->
 		@log msg,'error'

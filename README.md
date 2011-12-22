@@ -29,8 +29,10 @@ Usage
 Config options
 --------------
 
-* `showMillis` - Show the milliseconds in the timestamp
+* `showTimestamp` - Show the timestamp with every message.
+* `showMillis` - Show milliseconds in the timestamp.
 * `stringifyJSON` - Apply JSON.stringify to the given message. Good to log objects or arrays.
+* `prefix` - String that is prepended to every message logged with this instance.
 
 Test
 ----
@@ -40,4 +42,4 @@ You'll need `vows`. Then just run `npm test`.
 Future versions
 ---------------
 
-I am willing to add support for colored log messages and allow to define a prefix which is prepended to all messages.
+* support for colored log messages
