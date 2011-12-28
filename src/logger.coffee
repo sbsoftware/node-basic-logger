@@ -10,7 +10,7 @@ module.exports = class Logger
 		prefix: ""
 
 	constructor: (config={}) ->
-		@config = _.extend Logger.defaultConfig,config
+		@config = _.defaults config,Logger.defaultConfig
 
 	padZeros: (num,digits) ->
 		num = String num
@@ -23,8 +23,9 @@ module.exports = class Logger
 	log: (msg,level) ->
 		date = new Date
 		timestamp = date.getFullYear()+"-"+@padZeros((date.getMonth()+1),2)+"-"+@padZeros(date.getDate(),2)+" "+@padZeros(date.getHours(),2)+":"+@padZeros(date.getMinutes(),2)+":"+@padZeros(date.getSeconds(),2)
-		timestamp += "."+@padZeros(date.getMilliSeconds(),3) if @config.showMillis
+		timestamp += "."+@padZeros(date.getMilliseconds(),3) if @config.showMillis
 		msg = JSON.stringify msg if @config.stringifyJSON
+		output = ''
 		output += '['+timestamp+']' if @config.showTimestamp
 		output += ' '+@config.prefix if @config.prefix != ""
 		output += ' ('+level+') '
