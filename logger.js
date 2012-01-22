@@ -15,6 +15,20 @@
     };
 
     Logger.setLevel = function(level) {
+      switch (level) {
+        case 'error':
+          level = 1;
+          break;
+        case 'warning':
+        case 'warn':
+          level = 2;
+          break;
+        case 'info':
+          level = 3;
+          break;
+        case 'debug':
+          level = 4;
+      }
       return exports.level = level;
     };
 
@@ -63,6 +77,10 @@
     };
 
     Logger.prototype.warn = function(msg) {
+      return this.log(msg, 2, 'warning');
+    };
+
+    Logger.prototype.warning = function(msg) {
       return this.log(msg, 2, 'warning');
     };
 

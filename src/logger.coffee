@@ -10,6 +10,12 @@ module.exports = class Logger
 		prefix: ""
 		
 	@setLevel: (level) ->
+		switch level
+			when 'error' then	level = 1
+			when 'warning','warn' then	level = 2
+			when 'info' then level = 3
+			when 'debug' then	level = 4
+			
 		exports.level = level
 
 	constructor: (config={}) ->
@@ -45,6 +51,9 @@ module.exports = class Logger
 		@log msg,3,'info'
 		
 	warn: (msg) ->
+		@log msg,2,'warning'
+		
+	warning: (msg) ->
 		@log msg,2,'warning'
 		
 	debug: (msg) ->
