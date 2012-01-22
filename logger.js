@@ -5,6 +5,8 @@
 
   _ = require('underscore');
 
+  exports.level = 4;
+
   module.exports = Logger = (function() {
 
     Logger.defaultConfig = {

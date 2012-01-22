@@ -1,6 +1,9 @@
 pgkinfo = require('pkginfo')(module,'version')
 _ = require 'underscore'
 
+# default level = debug
+exports.level = 4
+
 module.exports = class Logger
 
 	@defaultConfig = 
