@@ -1,6 +1,6 @@
 {
 	"name": "basic-logger",
-	"version": "0.3.1",
+	"version": "0.3.2",
 	"description": "basic logger supporting error, warning, debug and info messages with timestamp.",
 	"author": "Stefan Bilharz <s.bilharz@web.de>",
 	"keywords": ["basic logger","log","logging","timestamp","log to console"],
