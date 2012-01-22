@@ -1,6 +1,6 @@
 {
 	"name": "basic-logger",
-	"version": "0.2.1",
+	"version": "0.3.0",
 	"description": "basic logger supporting error, warning, debug and info messages with timestamp.",
 	"author": "Stefan Bilharz <s.bilharz@web.de>",
 	"keywords": ["basic logger","log","logging","timestamp","log to console"],
@@ -16,7 +16,7 @@
 		"coffee-script": "1.2.x",
 		"vows": "0.5.x"
 	},
-	"main": "lib/logger",
+	"main": "logger.js",
 	"directories": {
 		"lib": "./lib"
 	},
