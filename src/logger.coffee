@@ -8,6 +8,9 @@ module.exports = class Logger
 		showTimestamp: true
 		stringifyJSON: true
 		prefix: ""
+		
+	@setLevel: (level) ->
+		exports.level = level
 
 	constructor: (config={}) ->
 		@config = _.defaults config,Logger.defaultConfig
@@ -18,28 +21,31 @@ module.exports = class Logger
 		while zerosToAdd > 0
 			num = '0'+num
 			zerosToAdd = zerosToAdd - 1;
-		num		
+		num
 	
-	log: (msg,level) ->
-		date = new Date
-		timestamp = date.getFullYear()+"-"+@padZeros((date.getMonth()+1),2)+"-"+@padZeros(date.getDate(),2)+" "+@padZeros(date.getHours(),2)+":"+@padZeros(date.getMinutes(),2)+":"+@padZeros(date.getSeconds(),2)
-		timestamp += "."+@padZeros(date.getMilliseconds(),3) if @config.showMillis
-		msg = JSON.stringify msg if @config.stringifyJSON
-		output = ''
-		output += '['+timestamp+']' if @config.showTimestamp
-		output += ' '+@config.prefix if @config.prefix != ""
-		output += ' ('+level+') '
-		output += msg
-		console.log output
+	log: (msg,level,levelName) ->
+		if level <= exports.level
+			date = new Date
+			timestamp = date.getFullYear()+"-"+@padZeros((date.getMonth()+1),2)+"-"+@padZeros(date.getDate(),2)+" "+@padZeros(date.getHours(),2)+":"+@padZeros(date.getMinutes(),2)+":"+@padZeros(date.getSeconds(),2)
+			timestamp += "."+@padZeros(date.getMilliseconds(),3) if @config.showMillis
+			msg = JSON.stringify msg if @config.stringifyJSON
+			output = ''
+			output += '['+timestamp+']' if @config.showTimestamp
+			output += ' '+@config.prefix if @config.prefix != ""
+			output += ' ('+levelName+') '
+			output += msg
+			return console.log output 
+		else
+			return -1
 		
 	error: (msg) ->
-		@log msg,'error'
+		@log msg,1,'error'
 		
 	info: (msg) ->
-		@log msg,'info'
+		@log msg,3,'info'
 		
 	warn: (msg) ->
-		@log msg,'warning'
+		@log msg,2,'warning'
 		
 	debug: (msg) ->
-		@log msg,'debug'
+		@log msg,4,'debug'
