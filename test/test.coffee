@@ -33,15 +33,20 @@ vows
 			"the result is the one-digits number left-padded with a zero": (topic) ->
 				assert.equal topic.padZeros(3,2),'03'
 				
-		"when logging a message":
+		"when logging a message with setting the log level to 2 (warning)":
 			topic: () ->
+				logger.setLevel 2
 				config = 
 					showMillis: true
 					prefix: "Test"
 				log = new logger config
-				
-			"the log method doesn't throw an error": (topic) ->
+			
+			"the warning method doesn't throw an error": (topic) ->
 				assert.doesNotThrow () ->
-					topic.info "test message"
+					topic.warn "test message"
+			
+			"the info method returns -1": (topic) ->
+				assert.equal topic.info("test message"),-1
+
 	
 .exportTo(module)
