@@ -16,22 +16,32 @@
       prefix: ""
     };
 
+    Logger.levels = {
+      error: 1,
+      warning: 2,
+      warn: 2,
+      info: 3,
+      debug: 4
+    };
+
     Logger.setLevel = function(level) {
-      switch (level) {
-        case 'error':
-          level = 1;
+      var levelName, levelValue, log, name, val, _ref;
+      levelName = "debug";
+      levelValue = 4;
+      _ref = Logger.levels;
+      for (name in _ref) {
+        val = _ref[name];
+        if (level === name || level === val) {
+          levelName = name;
+          levelValue = val;
           break;
-        case 'warning':
-        case 'warn':
-          level = 2;
-          break;
-        case 'info':
-          level = 3;
-          break;
-        case 'debug':
-          level = 4;
+        }
       }
-      return exports.level = level;
+      log = new this({
+        prefix: 'basic-logger'
+      });
+      log.info("Setting log level to '" + levelName + "'");
+      return exports.level = levelValue;
     };
 
     function Logger(config) {

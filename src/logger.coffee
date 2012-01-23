@@ -12,14 +12,25 @@ module.exports = class Logger
 		stringifyJSON: true
 		prefix: ""
 		
+	@levels =
+		error: 1
+		warning: 2
+		warn: 2
+		info: 3
+		debug: 4
+		
 	@setLevel: (level) ->
-		switch level
-			when 'error' then	level = 1
-			when 'warning','warn' then	level = 2
-			when 'info' then level = 3
-			when 'debug' then	level = 4
+		levelName = "debug"
+		levelValue = 4
+		for name,val of Logger.levels
+			if level == name or level == val
+				levelName = name
+				levelValue = val
+				break;
 			
-		exports.level = level
+		log = new this {prefix: 'basic-logger'}
+		log.info "Setting log level to '"+levelName+"'"
+		exports.level = levelValue		
 
 	constructor: (config={}) ->
 		@config = _.defaults config,Logger.defaultConfig
