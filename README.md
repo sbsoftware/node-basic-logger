@@ -1,7 +1,7 @@
 logger
 ======
 
-Basic logger for nodejs supporting error, warning, info and debug messages with timestamp.
+Basic logger for nodejs supporting error, warning, info, debug and trace messages with (or without) timestamp.
 Everything you log is printed to the console.
 
 Installation
@@ -18,22 +18,23 @@ Usage
 
 	var customConfig = {
 		showMillis: true;
-		stringifyJSON: false;
+		showTimestamp: true;
 	};
 
-	var log = new logger(customConfig)
+	var log = new logger(customConfig) // custom config parameters will be used, defaults will be used for the other parameters
 
-	log.info('New Info!');
 	log.error('An error occurred');
 	log.warn('I am not kidding!');
+	log.info('you just screwed this');
 	log.debug('this code is still alive...');
+	log.trace('we are here.');
 	
 Config options
 --------------
 
 * `showTimestamp` - Show the timestamp with every message.
 * `showMillis` - Show milliseconds in the timestamp.
-* `stringifyJSON` - Apply JSON.stringify to the given message. Good to log objects or arrays.
+* `printObjFunc` - The function to apply objects to, if logged. Default is util.inspect.
 * `prefix` - String that is prepended to every message logged with this instance.
 
 Test
