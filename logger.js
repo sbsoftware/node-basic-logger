@@ -10,7 +10,7 @@
   exports.defaultConfig = {
     showMillis: false,
     showTimestamp: true,
-    printObjFunc: JSON.stringify,
+    printObjFunc: require('util').inspect,
     prefix: ""
   };
 
@@ -73,7 +73,7 @@
         if (this.config.showMillis) {
           timestamp += "." + this.padZeros(date.getMilliseconds(), 3);
         }
-        if (typeof msg === "Object") msg = this.config.printObjFunc.apply(msg);
+        if (typeof msg === "object") msg = this.config.printObjFunc(msg);
         output = '';
         if (this.config.showTimestamp) output += '[' + timestamp + ']';
         if (this.config.prefix !== "") output += ' ' + this.config.prefix;

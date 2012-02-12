@@ -8,7 +8,7 @@ exports.level = 4
 exports.defaultConfig = 
 	showMillis: false
 	showTimestamp: true
-	printObjFunc: JSON.stringify
+	printObjFunc: require('util').inspect
 	prefix: ""
 
 module.exports = class Logger
@@ -53,7 +53,7 @@ module.exports = class Logger
 			date = new Date
 			timestamp = date.getFullYear()+"-"+@padZeros((date.getMonth()+1),2)+"-"+@padZeros(date.getDate(),2)+" "+@padZeros(date.getHours(),2)+":"+@padZeros(date.getMinutes(),2)+":"+@padZeros(date.getSeconds(),2)
 			timestamp += "."+@padZeros(date.getMilliseconds(),3) if @config.showMillis
-			msg = @config.printObjFunc.apply msg if typeof msg == "Object"
+			msg = @config.printObjFunc msg if typeof msg == "object"
 			output = ''
 			output += '['+timestamp+']' if @config.showTimestamp
 			output += ' '+@config.prefix if @config.prefix != ""
