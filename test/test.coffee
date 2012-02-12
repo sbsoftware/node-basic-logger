@@ -12,9 +12,9 @@ vows
 						showMillis: true
 					log = new logger config
 				
-				"the value of the logger config for showMillis is true and stringifyJSON is still true": (topic) ->
+				"the value of the logger config for showMillis is true and showTimestamp is still true": (topic) ->
 					assert.equal topic.config.showMillis,true
-					assert.equal topic.config.stringifyJSON,true
+					assert.equal topic.config.showTimestamp,true
 					
 			"with a custom config showMillis = false":
 				topic: () ->
@@ -22,9 +22,9 @@ vows
 						showMillis: false
 					log = new logger config
 				
-				"the value of the logger config for showMillis is false and stringifyJSON is still true": (topic) ->
+				"the value of the logger config for showMillis is false and showTimestamp is still true": (topic) ->
 					assert.equal topic.config.showMillis,false
-					assert.equal topic.config.stringifyJSON,true
+					assert.equal topic.config.showTimestamp,true
 				
 		"when padding a one-digit number with zeros to 2 digits":
 			topic: () ->
