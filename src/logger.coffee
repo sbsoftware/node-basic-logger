@@ -4,13 +4,14 @@ _ = require 'underscore'
 # default level = debug
 exports.level = 4
 
-module.exports = class Logger
+# default options
+exports.defaultConfig = 
+	showMillis: false
+	showTimestamp: true
+	printObjFunc: JSON.stringify
+	prefix: ""
 
-	@defaultConfig = 
-		showMillis: false
-		showTimestamp: true
-		stringifyJSON: true
-		prefix: ""
+module.exports = class Logger
 		
 	@levels =
 		error: 1
@@ -18,22 +19,26 @@ module.exports = class Logger
 		warn: 2
 		info: 3
 		debug: 4
+		trace: 5
 		
 	@setLevel: (level) ->
-		levelName = "debug"
-		levelValue = 4
+		levelName = null
+		levelValue = null
 		for name,val of Logger.levels
 			if level == name or level == val
 				levelName = name
 				levelValue = val
 				break;
-			
-		log = new this {prefix: 'basic-logger'}
-		log.info "Setting log level to '"+levelName+"'"
-		exports.level = levelValue		
+		
+		log = new this {prefix: 'basic-logger'}	
+		if levelName? and levelValue?
+			log.info "Setting log level to '"+levelName+"'"
+			exports.level = levelValue
+		else
+			log.warn "Can't set log level to '"+level+"'. This level does not exist."		
 
 	constructor: (config={}) ->
-		@config = _.defaults config,Logger.defaultConfig
+		@config = _.defaults config,exports.defaultConfig
 
 	padZeros: (num,digits) ->
 		num = String num
@@ -48,7 +53,7 @@ module.exports = class Logger
 			date = new Date
 			timestamp = date.getFullYear()+"-"+@padZeros((date.getMonth()+1),2)+"-"+@padZeros(date.getDate(),2)+" "+@padZeros(date.getHours(),2)+":"+@padZeros(date.getMinutes(),2)+":"+@padZeros(date.getSeconds(),2)
 			timestamp += "."+@padZeros(date.getMilliseconds(),3) if @config.showMillis
-			msg = JSON.stringify msg if @config.stringifyJSON
+			msg = @config.printObjFunc.apply msg if typeof msg == "Object"
 			output = ''
 			output += '['+timestamp+']' if @config.showTimestamp
 			output += ' '+@config.prefix if @config.prefix != ""
@@ -72,3 +77,6 @@ module.exports = class Logger
 		
 	debug: (msg) ->
 		@log msg,4,'debug'
+		
+	trace: (msg) ->
+		@log msg,5,'trace'
