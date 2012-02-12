@@ -7,27 +7,28 @@
 
   exports.level = 4;
 
-  module.exports = Logger = (function() {
+  exports.defaultConfig = {
+    showMillis: false,
+    showTimestamp: true,
+    printObjFunc: JSON.stringify,
+    prefix: ""
+  };
 
-    Logger.defaultConfig = {
-      showMillis: false,
-      showTimestamp: true,
-      stringifyJSON: true,
-      prefix: ""
-    };
+  module.exports = Logger = (function() {
 
     Logger.levels = {
       error: 1,
       warning: 2,
       warn: 2,
       info: 3,
-      debug: 4
+      debug: 4,
+      trace: 5
     };
 
     Logger.setLevel = function(level) {
       var levelName, levelValue, log, name, val, _ref;
-      levelName = "debug";
-      levelValue = 4;
+      levelName = null;
+      levelValue = null;
       _ref = Logger.levels;
       for (name in _ref) {
         val = _ref[name];
@@ -40,13 +41,17 @@
       log = new this({
         prefix: 'basic-logger'
       });
-      log.info("Setting log level to '" + levelName + "'");
-      return exports.level = levelValue;
+      if ((levelName != null) && (levelValue != null)) {
+        log.info("Setting log level to '" + levelName + "'");
+        return exports.level = levelValue;
+      } else {
+        return log.warn("Can't set log level to '" + level + "'. This level does not exist.");
+      }
     };
 
     function Logger(config) {
       if (config == null) config = {};
-      this.config = _.defaults(config, Logger.defaultConfig);
+      this.config = _.defaults(config, exports.defaultConfig);
     }
 
     Logger.prototype.padZeros = function(num, digits) {
@@ -68,7 +73,7 @@
         if (this.config.showMillis) {
           timestamp += "." + this.padZeros(date.getMilliseconds(), 3);
         }
-        if (this.config.stringifyJSON) msg = JSON.stringify(msg);
+        if (typeof msg === "Object") msg = this.config.printObjFunc.apply(msg);
         output = '';
         if (this.config.showTimestamp) output += '[' + timestamp + ']';
         if (this.config.prefix !== "") output += ' ' + this.config.prefix;
@@ -98,6 +103,10 @@
 
     Logger.prototype.debug = function(msg) {
       return this.log(msg, 4, 'debug');
+    };
+
+    Logger.prototype.trace = function(msg) {
+      return this.log(msg, 5, 'trace');
     };
 
     return Logger;
