@@ -1,5 +1,5 @@
-logger
-======
+Basic-Logger
+============
 
 Basic logger for nodejs supporting error, warning, info, debug and trace messages with (or without) timestamp.
 Everything you log is printed to the console.
