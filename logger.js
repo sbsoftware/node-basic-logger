@@ -1,5 +1,6 @@
 (function() {
-  var Logger, pgkinfo, _;
+  var Logger, pgkinfo, _,
+    __slice = Array.prototype.slice;
 
   pgkinfo = require('pkginfo')(module, 'version');
 
@@ -65,8 +66,9 @@
       return num;
     };
 
-    Logger.prototype.log = function(msg, level, levelName) {
-      var date, output, timestamp;
+    Logger.prototype.log = function() {
+      var args, date, level, levelName, msg, output, timestamp;
+      msg = arguments[0], level = arguments[1], levelName = arguments[2], args = 4 <= arguments.length ? __slice.call(arguments, 3) : [];
       if (level <= exports.level) {
         date = new Date;
         timestamp = date.getFullYear() + "-" + this.padZeros(date.getMonth() + 1, 2) + "-" + this.padZeros(date.getDate(), 2) + " " + this.padZeros(date.getHours(), 2) + ":" + this.padZeros(date.getMinutes(), 2) + ":" + this.padZeros(date.getSeconds(), 2);
@@ -79,34 +81,53 @@
         if (this.config.prefix !== "") output += ' ' + this.config.prefix;
         output += ' (' + levelName + ') ';
         output += msg;
-        return console.log(output);
+        args.unshift(output);
+        return console.log.apply(this, args);
       } else {
         return -1;
       }
     };
 
-    Logger.prototype.error = function(msg) {
-      return this.log(msg, 1, 'error');
+    Logger.prototype.error = function() {
+      var args, msg;
+      msg = arguments[0], args = 2 <= arguments.length ? __slice.call(arguments, 1) : [];
+      args.unshift(msg, 1, 'error');
+      return this.log.apply(this, args);
     };
 
-    Logger.prototype.info = function(msg) {
-      return this.log(msg, 3, 'info');
+    Logger.prototype.info = function() {
+      var args, msg;
+      msg = arguments[0], args = 2 <= arguments.length ? __slice.call(arguments, 1) : [];
+      args.unshift(msg, 3, 'info');
+      return this.log.apply(this, args);
     };
 
-    Logger.prototype.warn = function(msg) {
-      return this.log(msg, 2, 'warning');
+    Logger.prototype.warn = function() {
+      var args, msg;
+      msg = arguments[0], args = 2 <= arguments.length ? __slice.call(arguments, 1) : [];
+      args.unshift(msg, 2, 'warning');
+      return this.log.apply(this, args);
     };
 
-    Logger.prototype.warning = function(msg) {
-      return this.log(msg, 2, 'warning');
+    Logger.prototype.warning = function() {
+      var args, msg;
+      msg = arguments[0], args = 2 <= arguments.length ? __slice.call(arguments, 1) : [];
+      args.unshift(msg, 2, 'warning');
+      return this.log.apply(this, args);
     };
 
-    Logger.prototype.debug = function(msg) {
-      return this.log(msg, 4, 'debug');
+    Logger.prototype.debug = function() {
+      var args, msg;
+      msg = arguments[0], args = 2 <= arguments.length ? __slice.call(arguments, 1) : [];
+      args.unshift(msg, 4, 'debug');
+      return this.log.apply(this, args);
     };
 
-    Logger.prototype.trace = function(msg) {
-      return this.log(msg, 5, 'trace');
+    Logger.prototype.trace = function() {
+      var args, msg;
+      msg = arguments[0], args = 2 <= arguments.length ? __slice.call(arguments, 1) : [];
+      args.unshift(msg, 5, 'trace');
+      return this.log.apply(this, args);
     };
 
     return Logger;
