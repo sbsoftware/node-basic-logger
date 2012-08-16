@@ -6,7 +6,7 @@
 	"keywords": ["basic logger","log","logging","timestamp","log to console"],
 	"homepage": "https://github.com/drd0rk/logger",
 	"bugs": {
-		"url": "git://github.com/drd0rk/logger/issues/"
+		"url": "https://github.com/drd0rk/logger/issues/"
 	},
 	"dependencies": {
 		"pkginfo": "0.2.x",
