@@ -12,16 +12,17 @@ Installation
 Usage
 -----
 
-	var logger = require('basic-logger');
+	var Logger = require('basic-logger');
 	// configure level one time, it will be set to every instance of the logger
-	logger.setLevel('warning'); // only warnings and errors will be shown
+	Logger.setLevel('warning'); // only warnings and errors will be shown
+	Logger.setLevel('warning', true); // only warnings and errors will be shown and no message about the level change will be printed
 
 	var customConfig = {
 		showMillis: true;
 		showTimestamp: true;
 	};
 
-	var log = new logger(customConfig) // custom config parameters will be used, defaults will be used for the other parameters
+	var log = new Logger(customConfig) // custom config parameters will be used, defaults will be used for the other parameters
 
 	log.error('An error occurred');
 	log.warn('I am not kidding!');
@@ -46,3 +47,4 @@ Future versions
 ---------------
 
 * support for colored log messages
+* log to file
