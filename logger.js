@@ -26,8 +26,9 @@
       trace: 5
     };
 
-    Logger.setLevel = function(level) {
+    Logger.setLevel = function(level, silent) {
       var levelName, levelValue, log, name, val, _ref;
+      if (silent == null) silent = false;
       levelName = null;
       levelValue = null;
       _ref = Logger.levels;
@@ -43,7 +44,7 @@
         prefix: 'basic-logger'
       });
       if ((levelName != null) && (levelValue != null)) {
-        log.info("Setting log level to '" + levelName + "'");
+        if (!silent) log.info("Setting log level to '" + levelName + "'");
         return exports.level = levelValue;
       } else {
         return log.warn("Can't set log level to '" + level + "'. This level does not exist.");
@@ -68,7 +69,8 @@
 
     Logger.prototype.log = function() {
       var args, date, level, levelName, msg, output, timestamp;
-      msg = arguments[0], level = arguments[1], levelName = arguments[2], args = 4 <= arguments.length ? __slice.call(arguments, 3) : [];
+      msg = arguments[0], levelName = arguments[1], args = 3 <= arguments.length ? __slice.call(arguments, 2) : [];
+      level = Logger.levels[levelName];
       if (level <= exports.level) {
         date = new Date;
         timestamp = date.getFullYear() + "-" + this.padZeros(date.getMonth() + 1, 2) + "-" + this.padZeros(date.getDate(), 2) + " " + this.padZeros(date.getHours(), 2) + ":" + this.padZeros(date.getMinutes(), 2) + ":" + this.padZeros(date.getSeconds(), 2);
@@ -91,42 +93,42 @@
     Logger.prototype.error = function() {
       var args, msg;
       msg = arguments[0], args = 2 <= arguments.length ? __slice.call(arguments, 1) : [];
-      args.unshift(msg, 1, 'error');
+      args.unshift(msg, 'error');
       return this.log.apply(this, args);
     };
 
     Logger.prototype.info = function() {
       var args, msg;
       msg = arguments[0], args = 2 <= arguments.length ? __slice.call(arguments, 1) : [];
-      args.unshift(msg, 3, 'info');
+      args.unshift(msg, 'info');
       return this.log.apply(this, args);
     };
 
     Logger.prototype.warn = function() {
       var args, msg;
       msg = arguments[0], args = 2 <= arguments.length ? __slice.call(arguments, 1) : [];
-      args.unshift(msg, 2, 'warning');
+      args.unshift(msg, 'warning');
       return this.log.apply(this, args);
     };
 
     Logger.prototype.warning = function() {
       var args, msg;
       msg = arguments[0], args = 2 <= arguments.length ? __slice.call(arguments, 1) : [];
-      args.unshift(msg, 2, 'warning');
+      args.unshift(msg, 'warning');
       return this.log.apply(this, args);
     };
 
     Logger.prototype.debug = function() {
       var args, msg;
       msg = arguments[0], args = 2 <= arguments.length ? __slice.call(arguments, 1) : [];
-      args.unshift(msg, 4, 'debug');
+      args.unshift(msg, 'debug');
       return this.log.apply(this, args);
     };
 
     Logger.prototype.trace = function() {
       var args, msg;
       msg = arguments[0], args = 2 <= arguments.length ? __slice.call(arguments, 1) : [];
-      args.unshift(msg, 5, 'trace');
+      args.unshift(msg, 'trace');
       return this.log.apply(this, args);
     };
 
