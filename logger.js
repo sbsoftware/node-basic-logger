@@ -1,12 +1,10 @@
 (function() {
-  var Logger, pgkinfo, _,
+  var Logger, logLevel, pgkinfo, _,
     __slice = Array.prototype.slice;
 
   pgkinfo = require('pkginfo')(module, 'version');
 
   _ = require('underscore');
-
-  exports.level = 4;
 
   exports.defaultConfig = {
     showMillis: false,
@@ -14,6 +12,8 @@
     printObjFunc: require('util').inspect,
     prefix: ""
   };
+
+  logLevel = 4;
 
   module.exports = Logger = (function() {
 
@@ -45,7 +45,7 @@
       });
       if ((levelName != null) && (levelValue != null)) {
         if (!silent) log.info("Setting log level to '" + levelName + "'");
-        return exports.level = levelValue;
+        return logLevel = levelValue;
       } else {
         return log.warn("Can't set log level to '" + level + "'. This level does not exist.");
       }
@@ -71,7 +71,7 @@
       var args, date, level, levelName, msg, output, timestamp;
       msg = arguments[0], levelName = arguments[1], args = 3 <= arguments.length ? __slice.call(arguments, 2) : [];
       level = Logger.levels[levelName];
-      if (level <= exports.level) {
+      if (level <= logLevel) {
         date = new Date;
         timestamp = date.getFullYear() + "-" + this.padZeros(date.getMonth() + 1, 2) + "-" + this.padZeros(date.getDate(), 2) + " " + this.padZeros(date.getHours(), 2) + ":" + this.padZeros(date.getMinutes(), 2) + ":" + this.padZeros(date.getSeconds(), 2);
         if (this.config.showMillis) {

@@ -1,15 +1,15 @@
 pgkinfo = require('pkginfo')(module,'version')
 _ = require 'underscore'
 
-# default level = debug
-exports.level = 4
-
 # default options
 exports.defaultConfig = 
   showMillis: false
   showTimestamp: true
   printObjFunc: require('util').inspect
   prefix: ""
+
+# default level = debug
+logLevel = 4
 
 module.exports = class Logger
     
@@ -33,7 +33,7 @@ module.exports = class Logger
     log = new this {prefix: 'basic-logger'} 
     if levelName? and levelValue?
       log.info "Setting log level to '"+levelName+"'" if !silent
-      exports.level = levelValue
+      logLevel = levelValue
     else
       log.warn "Can't set log level to '"+level+"'. This level does not exist."     
 
@@ -50,7 +50,7 @@ module.exports = class Logger
   
   log: (msg,levelName,args...) ->
     level = Logger.levels[levelName]
-    if level <= exports.level
+    if level <= logLevel
       date = new Date
       timestamp = date.getFullYear()+"-"+@padZeros((date.getMonth()+1),2)+"-"+@padZeros(date.getDate(),2)+" "+@padZeros(date.getHours(),2)+":"+@padZeros(date.getMinutes(),2)+":"+@padZeros(date.getSeconds(),2)
       timestamp += "."+@padZeros(date.getMilliseconds(),3) if @config.showMillis

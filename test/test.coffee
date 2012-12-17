@@ -44,6 +44,7 @@ vows
 			"the warning method doesn't throw an error": (topic) ->
 				assert.doesNotThrow () ->
 					topic.warn "test message"
+				assert.notEqual topic.warn("test message"),-1
 			
 			"the info method returns -1": (topic) ->
 				assert.equal topic.info("test message"),-1
