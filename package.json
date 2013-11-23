@@ -37,6 +37,6 @@
     "node": ">= 0.4"
   },
   "scripts": {
-    "test": "NODE_ENV=test node_modules/.bin/vows --spec test/*.coffee"
+    "test": "NODE_ENV=test node_modules/.bin/mocha test/ --recursive -R list"
   }
 }
