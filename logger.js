@@ -1,8 +1,6 @@
 (function() {
-  var Logger, logLevel, pgkinfo, _,
+  var Logger, logLevel, _,
     __slice = Array.prototype.slice;
-
-  pgkinfo = require('pkginfo')(module, 'version');
 
   _ = require('underscore');
 
