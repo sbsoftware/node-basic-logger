@@ -12,8 +12,6 @@
 		"underscore": "1.2.x"
 	},
 	"devDependencies": {
-		"coffee-script": "1.2.x",
-		"vows": "0.5.x"
 	},
 	"main": "logger.js",
 	"licenses": [
