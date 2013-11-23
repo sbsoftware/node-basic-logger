@@ -1,29 +1,42 @@
 {
-	"name": "basic-logger",
-	"version": "0.4.4",
-	"description": "basic logger supporting error, warning, debug and info messages with timestamp.",
-	"author": "Stefan Bilharz <stefan@sbsoftware.de>",
-	"keywords": ["basic logger","log","logging","timestamp","log to console"],
-	"homepage": "https://github.com/sbsoftware/node-basic-logger",
-	"bugs": {
-		"url": "https://github.com/sbsoftware/node-basic-logger/issues/"
-	},
-	"dependencies": {
-		"underscore": "1.2.x"
-	},
-	"devDependencies": {
-	},
-	"main": "logger.js",
-	"licenses": [
-		{
-		"type": "MIT",
-		"url": "http://opensource.org/licenses/mit-license.php"
-		}
-	],
-	"engines": {
-		"node": ">= 0.4"
-	},
-	"scripts": {
-		"test": "NODE_ENV=test node_modules/.bin/vows --spec test/*.coffee"
-	}
+  "name": "basic-logger",
+  "version": "0.4.4",
+  "description": "basic logger supporting error, warning, debug and info messages with timestamp.",
+  "author": "Stefan Bilharz <stefan@sbsoftware.de>",
+  "keywords": [
+    "basic logger",
+    "log",
+    "logging",
+    "timestamp",
+    "log to console"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sbsoftware/node-basic-logger"
+  },
+  "homepage": "https://github.com/sbsoftware/node-basic-logger",
+  "bugs": {
+    "url": "https://github.com/sbsoftware/node-basic-logger/issues/"
+  },
+  "dependencies": {
+    "underscore": "1.2.x"
+  },
+  "devDependencies": {
+    "should": "~2.1.0",
+    "sinon": "~1.7.3",
+    "mocha": "~1.14.0"
+  },
+  "main": "logger.js",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://opensource.org/licenses/mit-license.php"
+    }
+  ],
+  "engines": {
+    "node": ">= 0.4"
+  },
+  "scripts": {
+    "test": "NODE_ENV=test node_modules/.bin/vows --spec test/*.coffee"
+  }
 }
