@@ -26,7 +26,6 @@
 		"node": ">= 0.4"
 	},
 	"scripts": {
-		"test": "NODE_ENV=test node_modules/.bin/vows --spec test/*.coffee",
-		"watch": "node_modules/.bin/coffee -c -w -o . src"
+		"test": "NODE_ENV=test node_modules/.bin/vows --spec test/*.coffee"
 	}
 }
